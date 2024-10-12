@@ -11,8 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('product_logs', function (Blueprint $table) {
-            $table->timestamp('created_at')->useCurrent()->change();
+        Schema::table('role', function (Blueprint $table) {
+           $table->timestamp('created_at')->useCurrent()->change();
             $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate()->change();
         });
     }
@@ -22,9 +22,9 @@ return new class extends Migration
      */
     public function down(): void
     {
-       Schema::table('product_logs', function (Blueprint $table) {
-           $table->timestamp('created_at')->nullable()->default(null)->change();
-           $table->timestamp('updated_at')->nullable()->default(null)->change();
+        Schema::table('role', function (Blueprint $table) {
+            $table->timestamp('created_at')->nullable()->default(null)->change();
+            $table->timestamp('updated_at')->nullable()->default(null)->change();
         });
     }
 };

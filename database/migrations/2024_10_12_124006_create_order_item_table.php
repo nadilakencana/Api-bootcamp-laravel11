@@ -17,7 +17,10 @@ return new class extends Migration
             $table->foreign('id_order')->references('id')->on('orders')->onDelete('cascade')->onUpdate('cascade');
             $table->unsignedBigInteger('id_product');
             $table->foreign('id_product')->references('id')->on('products')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('qty');
+            $table->integer('qty');
+            $table->string('price');
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade')->nullable();
             $table->string('amount');
             $table->timestamps();
         });

@@ -14,13 +14,13 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->string('code_order');
+            $table->unsignedBigInteger('id_payment')->nullable();
+            $table->foreign('id_payment')->references('id')->on('payment_method')->onDelete('cascade')->onUpdate('cascade');
+            $table->string('status_order');
             $table->string('sub_amount');
             $table->string('amount');
-            $table->string('status_order');
-            $table->unsignedBigInteger('create_by')->nullable();
-            $table->foreign('create_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
-            $table->unsignedBigInteger('id_payment')->nullable();
-            $table->foreign('id_payment')->references('id')->on('payment_method')->onDelete('cascade')->onUpdate('cascade'); 
+            $table->unsignedBigInteger('created_by')->nullable();
+            $table->foreign('created_by')->references('id')->on('users')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
