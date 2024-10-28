@@ -12,7 +12,7 @@ class Product extends Model
     protected $guarded = [];
 
     public function Category(){
-        return $this->blongsTo(Category::class, 'id_catgory' , 'id');
+        return $this->belongsTo(Category::class, 'id_category' , 'id');
     }
 
     public function OrderItem(){
