@@ -5,6 +5,8 @@ use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\SalesController;
 use App\Models\Category;
 use Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful;
 
@@ -27,11 +29,14 @@ Route::middleware(['api'])->group(function (){
         Route::get('detail-product/{slug}', 'getProduct_Detail_customer');
         Route::get('product-by-category/{slug}', 'getProduct_byCategory');
     });
-
+    
+    Route::controller(SalesController::class)->group(function(){
+        Route::post('customer-Order', 'order');
+    });
 
     // api Admin Auth
     Route::middleware(['auth:sanctum','Auth.auth'])->group(function(){
-        // APi category 
+        // APi category
         Route::controller(CategoryController::class)->group(function(){
             Route::get('get-category', 'getCategory');
             Route::post('create-data-category', 'CreateCategory');
@@ -47,8 +52,24 @@ Route::middleware(['api'])->group(function (){
             Route::post('update-product/{slug}', 'UpdateDataProdut');
             Route::delete('delete-product/{slug}', 'deleteProduct');
         });
+
+
+        Route::controller(PaymentController::class)->group(function(){
+            Route::get('get-Payment', 'getPayment');
+            Route::post('create-payment', 'Createpayment');
+            Route::put('Update-payment/{id}', 'upadatePayment');
+            Route::delete('delete-data-payment/{id}', 'DeletePayment');
+        });
+
+        Route::controller(SalesController::class)->group(function(){
+            // Route::get('code-order/{length}', 'code_order');
+            Route::post('create-Order', 'order');
+            Route::get('detail-order/{code}','Detailorder');
+            Route::post('payment/{code}', 'payment_order');
+        });
+     
     });
-    
+
 
 });
 
