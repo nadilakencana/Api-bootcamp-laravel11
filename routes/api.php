@@ -29,7 +29,7 @@ Route::middleware(['api'])->group(function (){
         Route::get('detail-product/{slug}', 'getProduct_Detail_customer');
         Route::get('product-by-category/{slug}', 'getProduct_byCategory');
     });
-    
+
     Route::controller(SalesController::class)->group(function(){
         Route::post('customer-Order', 'order');
     });
@@ -66,8 +66,15 @@ Route::middleware(['api'])->group(function (){
             Route::post('create-Order', 'order');
             Route::get('detail-order/{code}','Detailorder');
             Route::post('payment/{code}', 'payment_order');
+            Route::post('modify/order/admin', 'modify_order');
+            Route::post('modify/delete/item-order', 'modify_delete_item');
+
+            Route::get('report/order/daily', 'dailyReports');
+            Route::get('report/order/weekly', 'weeklyReports');
+            Route::get('report/order/monthly', 'monthlyReports');
+
         });
-     
+
     });
 
 
